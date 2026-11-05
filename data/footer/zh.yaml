@@ -1,0 +1,37 @@
+brand:
+  name: MOONCAKE
+  tagline: 'PostgreSQL **实时列存**与 **Iceberg 湖仓**套件'
+  slogan: '亚秒级实时列存镜像与 DuckDB 向量化分析扩展。<br>原由 [Mooncake Labs](https://github.com/Mooncake-Labs) 开发，现由 [PGSTY](https://pgsty.com/zh) 接手维护。'
+columns:
+  - title: "核心文档"
+    links:
+      - { label: "概览与简介", url: "docs/intro/" }
+      - { label: "架构总览", url: "docs/intro/architecture/" }
+      - { label: "快速开始", url: "docs/getting-started/" }
+      - { label: "快速上手", url: "docs/getting-started/hello-world/" }
+      - { label: "SQL 参考", url: "docs/reference/" }
+      - { label: "Iceberg 湖仓", url: "docs/reference/iceberg/" }
+  - title: "扩展套件"
+    links:
+      - { label: "pg_mooncake", url: "docs/intro/" }
+      - { label: "moonlink", url: "docs/intro/moonlink/" }
+      - { label: "duckdb_mooncake", url: "docs/intro/duckdb-mooncake/" }
+      - { label: "实时 HTAP 分析", url: "docs/use-cases/real-time-analytics/" }
+      - { label: "大表分区归档", url: "docs/use-cases/archiving/" }
+      - { label: "v0.1 历史归档", url: "docs/v0.1/" }
+  - title: "项目与博客"
+    links:
+      - { label: "工程技术博客", url: "blog/post/" }
+      - { label: "版本发布说明", url: "blog/release/" }
+      - { label: "关于与许可", url: "docs/about/" }
+      - { label: "来源与署名", url: "docs/about/attribution/" }
+      - { label: "GitHub", url: "https://github.com/pgsty/pg_mooncake", external: true }
+      - { label: "报告问题", url: "https://github.com/pgsty/pg_mooncake/issues", external: true }
+  - title: "开源生态"
+    links:
+      - { label: "Pigsty", url: "https://pigsty.cc/", external: true }
+      - { label: "PIG CLI", url: "https://pig.pgsty.com/zh/", external: true }
+      - { label: "PGEXT.CLOUD", url: "https://pgext.cloud/", external: true }
+      - { label: "Vchord 文档", url: "https://vchord.pgsty.com/zh/", external: true }
+      - { label: "PG 中文社区", url: "https://pgsql.cc/", external: true }
+      - { label: "PG 知识图谱", url: "https://pg.center/docs/reference/", external: true }

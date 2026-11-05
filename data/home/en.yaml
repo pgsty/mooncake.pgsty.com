@@ -1,0 +1,291 @@
+sections:
+  - hero
+  - metrics
+  - capabilities
+  - type: cards
+    key: suite
+  - steps
+  - faq
+  - cta
+
+hero:
+  eyebrow: pg_mooncake 0.3.0 · PostgreSQL 14–18 · DuckDB 2.0 & Apache Iceberg v2
+  title_lines:
+    - Real-Time Columnstore
+    - Built for PostgreSQL
+  title_size: 3.6rem
+  lead: >-
+    Create sub-second columnar mirrors of PostgreSQL tables powered by
+    `moonlink` logical replication, `pg_duckdb` vectorized execution, and open Apache Iceberg v2 storage.
+  note: 'Forked from [Mooncake Labs](https://github.com/Mooncake-Labs/pg_mooncake), now maintained by [PGSTY](https://pgsty.com/) · [MIT & BSL-1.1 Exception](/docs/about/license/)'
+  image:
+    light: img/mooncake-architecture-light.svg
+    dark: img/mooncake-architecture-dark.svg
+    alt: >-
+      Mooncake architecture: PostgreSQL rowstore WAL streams into Moonlink in-memory Arrow buffers
+      and Parquet files, queried via pg_duckdb and duckdb_mooncake or exported as Apache Iceberg v2 tables.
+  media:
+    ratio: 1.24fr 0.76fr
+    max_width: 440px
+    hide_below: lg
+  actions:
+    - label: Get Started
+      url: /docs/getting-started/
+      icon: fa-solid fa-rocket
+      style: primary
+    - label: Hello World
+      url: /docs/getting-started/hello-world/
+      icon: fa-solid fa-terminal
+      style: ghost
+    - label: Architecture
+      url: /docs/intro/architecture/
+      icon: fa-solid fa-sitemap
+      style: ghost
+  detail:
+    label: What's new in pg_mooncake 0.3.0
+    url: /blog/release/pg-mooncake-0.3.0/
+
+metrics:
+  eyebrow: Real-Time HTAP & Lakehouse Performance
+  title: Columnar analytics in Postgres without ETL pipelines
+  desc: Combine PostgreSQL transactional writes with DuckDB 2.0 vectorized execution and open Apache Iceberg v2 object storage.
+  columns: 2
+  items:
+    - value: "Up to 1000×"
+      title: Faster analytical scans
+      label: Faster analytical scans
+      desc: Vectorized DuckDB 2.0 scans over Parquet & Arrow vs regular Postgres heap tables
+      icon: fa-solid fa-bolt
+      url: /docs/reference/query-columnstore/
+    - value: "< 10 ms"
+      title: Sub-second CDC sync
+      label: Sub-second CDC sync
+      desc: Logical replication streams INSERT, UPDATE, and DELETE changes directly into Moonlink buffers
+      icon: fa-solid fa-arrows-rotate
+      url: /docs/intro/moonlink/
+    - value: "Iceberg v2"
+      title: Open Lakehouse format
+      label: Open Lakehouse format
+      desc: Export snapshots to S3, Cloudflare R2, or local disk for Spark, Snowflake, and PyIceberg
+      icon: fa-solid fa-cloud
+      url: /docs/reference/iceberg/
+    - value: "Zero ETL"
+      title: No Kafka or Debezium
+      label: No Kafka or Debezium
+      desc: Mirror local or remote PostgreSQL tables with a single CALL mooncake.create_table()
+      icon: fa-solid fa-layer-group
+      url: /docs/reference/create-columnstore/
+
+capabilities:
+  eyebrow: Core Engine Architecture
+  title: Write to rowstore, read from columnstore
+  text: pg_mooncake pairs an embedded Rust ingestion engine (moonlink) with DuckDB 2.0 vectorized execution via pg_duckdb and duckdb_mooncake.
+  items:
+    - ref: 01 / PG_MOONCAKE · COLUMNSTORE MIRROR
+      title: One command to mirror any Postgres table
+      url: /docs/reference/create-columnstore/
+      motto: Native USING mooncake Table Access Method + Logical Replication
+      bullets:
+        - 'Creates a read-only `USING mooncake` mirror of any heap or partitioned table'
+        - 'Keeps your OLTP write path 100% unchanged—no triggers or dual writes'
+        - 'Can replicate from the local database or a remote PostgreSQL `src_uri`'
+      value: Turn slow analytical queries into sub-second vectorized scans.
+      visual:
+        type: code
+        aria_label: Create a columnstore mirror table in PostgreSQL
+        title: create_mirror.sql
+        lines:
+          - { class: c, prefix: '-- ', text: 'Enable pg_mooncake (auto-loads pg_duckdb 1.2.0)' }
+          - { class: k, prefix: '', text: 'CREATE EXTENSION IF NOT EXISTS pg_mooncake CASCADE;' }
+          - { class: c, prefix: '-- ', text: 'Create a real-time columnstore mirror of orders' }
+          - { class: k, prefix: '', text: 'CALL mooncake.create_table(''orders_analytics'', ''orders'');' }
+          - { class: c, prefix: '-- ', text: 'Write to rowstore, query from columnstore' }
+          - { class: k, prefix: '', text: 'INSERT INTO orders (customer_id, amount) VALUES (42, 199.95);' }
+          - { class: k, prefix: '', text: 'SELECT customer_id, SUM(amount) FROM orders_analytics' }
+          - { class: k, prefix: '  ', text: 'GROUP BY customer_id;' }
+    - ref: 02 / MOONLINK · REAL-TIME CDC ENGINE
+      title: Fast updates, deletes, and LSN consistency
+      url: /docs/intro/moonlink/
+      motto: Embedded Rust background worker & standalone ingestion server
+      bullets:
+        - 'Buffers recent writes in memory as **Apache Arrow** record batches'
+        - 'Handles `UPDATE` and `DELETE` via **Roaring Bitmap** deletion vectors'
+        - 'Enforces PostgreSQL LSN barriers so queries always read consistent snapshots'
+      value: Avoids the small-file problem of traditional Parquet/Iceberg writers.
+      visual:
+        type: code
+        aria_label: Inspect Moonlink replication LSN and flush state
+        title: moonlink_status.sql
+        lines:
+          - { class: c, prefix: '-- ', text: 'Inspect active columnstore mirrors and WAL LSNs' }
+          - { class: k, prefix: '', text: 'SELECT * FROM mooncake.list_tables();' }
+          - { class: c, prefix: '-- ', text: 'Returns: table, commit_lsn, flush_lsn, iceberg_warehouse_location' }
+          - { class: c, prefix: '-- ', text: 'Force-flush buffered Arrow data into Parquet + Iceberg' }
+          - { class: k, prefix: '', text: 'CALL mooncake.create_snapshot(''orders_analytics'');' }
+          - { class: c, prefix: '-- ', text: 'Compact Parquet files and rewrite deletion vectors' }
+          - { class: k, prefix: '', text: 'CALL mooncake.optimize_table(''orders_analytics'', ''full'');' }
+    - ref: 03 / DUCKDB_MOONCAKE · VECTORIZED SCAN
+      title: Powered by DuckDB 2.0 & pg_duckdb 1.2
+      url: /docs/intro/duckdb-mooncake/
+      motto: Multi-file Parquet statistics pruning + zero-copy Arrow scan
+      bullets:
+        - 'Merges flushed **Parquet** files and in-memory **Arrow** buffers on the fly'
+        - 'Uses DuckDB 2.0 multi-file Parquet statistics for segment elimination'
+        - 'Seamlessly joins columnstore tables with regular PostgreSQL heap tables'
+      value: Full DuckDB analytical speed using standard PostgreSQL connections.
+      visual:
+        type: code
+        aria_label: Hybrid join between Postgres heap and Mooncake columnstore
+        title: hybrid_join.sql
+        lines:
+          - { class: c, prefix: '-- ', text: 'Join regular Postgres heap table with columnstore mirror' }
+          - { class: k, prefix: '', text: 'SELECT u.region, date_trunc(''day'', o.created_at) AS day,' }
+          - { class: k, prefix: '       ', text: 'COUNT(*) AS orders, SUM(o.amount) AS revenue' }
+          - { class: k, prefix: '', text: 'FROM users u' }
+          - { class: k, prefix: '', text: 'JOIN orders_analytics o ON u.id = o.customer_id' }
+          - { class: k, prefix: '', text: 'WHERE o.created_at >= NOW() - INTERVAL ''30 days''' }
+          - { class: k, prefix: '', text: 'GROUP BY u.region, day ORDER BY day DESC;' }
+    - ref: 04 / APACHE ICEBERG v2 · ZERO-ETL LAKEHOUSE
+      title: Export to S3 / R2 & query your data lake
+      url: /docs/reference/iceberg/
+      motto: Open Iceberg v2 metadata + external Parquet/Delta/Iceberg scans
+      bullets:
+        - 'Writes standard **Apache Iceberg v2** metadata to local disk, S3, or R2'
+        - 'Query external Parquet, CSV, Iceberg, and Delta Lake files inside Postgres'
+        - ' Partition-archiving pattern: drop old Postgres partitions, keep full history in S3'
+      value: Bridge operational Postgres and your cloud lakehouse without external pipelines.
+      visual:
+        type: code
+        aria_label: Configure S3 bucket and query Iceberg metadata
+        title: iceberg_lakehouse.sql
+        lines:
+          - { class: c, prefix: '-- ', text: 'Configure S3 / R2 credentials and default bucket' }
+          - { class: k, prefix: '', text: 'INSERT INTO duckdb.secrets (name, type, key_id, secret, region, scope)' }
+          - { class: v, prefix: '  ', text: 'VALUES (''s3_lake'', ''S3'', ''AKIA...'', ''secret...'', ''us-east-1'', ''s3://my-bucket'');' }
+          - { class: k, prefix: '', text: 'SET mooncake.default_bucket = ''s3://my-bucket/warehouse'';' }
+          - { class: c, prefix: '-- ', text: 'Materialize a new Iceberg v2 snapshot on S3' }
+          - { class: k, prefix: '', text: 'CALL mooncake.create_snapshot(''orders_analytics'');' }
+
+suite:
+  eyebrow: Documentation Sections
+  title: Explore the complete Mooncake documentation
+  desc: Unified documentation for pg_mooncake v0.3.0, Moonlink v0.0.1, duckdb_mooncake v0.0.2, use-case architectures, and the legacy v0.1 Delta Lake archive.
+  columns: 3
+  items:
+    - title: Introduction & Architecture
+      meta: Core Architecture · v0.3.0
+      icon: fa-solid fa-compass
+      class: td-landing-card--core
+      desc: Understand how pg_mooncake, Moonlink, duckdb_mooncake, and pg_duckdb 1.2.0 work together, and how v0.2/v0.3 evolved from v0.1.
+      url: /docs/intro/
+    - title: Getting Started
+      meta: Install · Hello World · Limits
+      icon: fa-solid fa-rocket
+      class: td-landing-card--core
+      desc: Install pg_mooncake via Pigsty packages or build from source on PostgreSQL 14–18, run the Hello World tutorial, and review known limitations.
+      url: /docs/getting-started/
+    - title: SQL & Config Reference
+      meta: Procedures · Queries · Iceberg
+      icon: fa-solid fa-code
+      class: td-landing-card--core
+      desc: Complete reference for mooncake.create_table, create_snapshot, optimize_table, list_tables, query shapes, Iceberg S3/R2 setup, and data lake scans.
+      url: /docs/reference/
+    - title: Use Cases & Patterns
+      meta: HTAP · Archiving · Lakehouse · Logs
+      icon: fa-solid fa-diagram-project
+      desc: Architectural blueprints for real-time operational analytics, time-partitioned table archiving, zero-ETL Postgres lakehouse, and OpenTelemetry logs.
+      url: /docs/use-cases/
+    - title: v0.1 Archive (Delta Lake)
+      meta: Legacy Reference Manual
+      icon: fa-solid fa-box-archive
+      class: td-landing-card--deprecated
+      desc: Complete historical reference for pg_mooncake v0.1, which used direct USING columnstore DDL and Delta Lake storage before the Moonlink redesign.
+      url: /docs/v0.1/
+    - title: About, License & SBOM
+      meta: MIT · BSL-1.1 Exception · Audit
+      icon: fa-solid fa-circle-info
+      class: td-landing-card--upstream
+      desc: PGSTY community stewardship, MIT and BSL-1.1 linking exception licensing, Wayback Machine recovery provenance, and Cargo security audit reports.
+      url: /docs/about/
+
+steps:
+  eyebrow: Quick Start
+  title: Run pg_mooncake in three steps
+  desc: Install native packages via Pigsty, preload the extensions, and create your first real-time columnstore mirror.
+  items:
+    - icon: fa-solid fa-download
+      title: Install packages
+      desc: Install `pg_duckdb` and `pg_mooncake` with the `pig` package manager across 16 Linux targets and PostgreSQL 14–18.
+      cmd:
+        code: pig repo add pgsql -u && pig install pg_duckdb pg_mooncake
+    - icon: fa-solid fa-plug
+      title: Enable extension
+      desc: Set `wal_level = logical` and `shared_preload_libraries = 'pg_duckdb,pg_mooncake'`, then enable `pg_mooncake`.
+      cmd:
+        code: psql -d postgres -c "CREATE EXTENSION IF NOT EXISTS pg_mooncake CASCADE;"
+    - icon: fa-solid fa-table-columns
+      title: Mirror & query
+      desc: Create a real-time columnstore mirror of your table with `mooncake.create_table` and run vectorized queries.
+      cmd:
+        code: psql -d postgres -c "CALL mooncake.create_table('orders_analytics', 'orders');"
+
+faq:
+  eyebrow: Frequently Asked Questions
+  title: Understanding Mooncake & PGSTY Stewardship
+  flat: true
+  items:
+    - question: Why is the PGSTY community maintaining pg_mooncake, duckdb_mooncake, and moonlink?
+      answer: >-
+        **Mooncake Labs Inc.**, the creators of `pg_mooncake`, `duckdb_mooncake`, and `moonlink`, was acquired by
+        Databricks, after which the original documentation site (`docs.mooncake.dev`) went offline and upstream
+        maintenance paused. The **[PGSTY](https://pigsty.io/)** community recovered the complete historical documentation
+        from the Internet Archive Wayback Machine and maintains the open-source forks—[`pgsty/pg_mooncake`](https://github.com/pgsty/pg_mooncake),
+        [`pgsty/duckdb_mooncake`](https://github.com/pgsty/duckdb_mooncake), and [`pgsty/moonlink`](https://github.com/pgsty/moonlink)—for the PostgreSQL ecosystem.
+    - question: What changed in PGSTY's pg_mooncake 0.3.0 release?
+      answer: >-
+        [**`pg_mooncake 0.3.0`**](/blog/release/pg-mooncake-0.3.0/) upgrades the Rust PostgreSQL extension to **`pgrx 0.19.3`**
+        (supporting **PostgreSQL 14–18**), ports **`duckdb_mooncake` (`v0.0.2`)** to **`pg_duckdb 1.2.0`** and **DuckDB `v2.0.0`**
+        (using exported multi-file Parquet statistics interfaces without object-cache lock reentrancy), fixes **`moonlink` (`v0.0.1`)**
+        `create_snapshot(lsn)` hangs when unrelated tables advance database WAL, automatically sets `REPLICA IDENTITY FULL` on existing
+        leaf partitions, and patches 20+ RustSec dependency advisories.
+    - question: How does pg_mooncake v0.2 / v0.3 differ from v0.1?
+      answer: >-
+        In [`v0.1`](/docs/v0.1/), users wrote directly to `CREATE TABLE ... USING columnstore` tables backed by Delta Lake, which struggled
+        with small frequent OLTP inserts and updates. Starting in `v0.2` and `v0.3.0`, `pg_mooncake` uses a **columnstore mirror** architecture
+        powered by [`moonlink`](/docs/intro/moonlink/): your application continues writing to standard PostgreSQL heap tables (`INSERT`/`UPDATE`/`DELETE`),
+        while `moonlink` streams changes via logical replication into in-memory Arrow buffers, Roaring deletion vectors, and Apache Iceberg v2 Parquet files.
+        See [v0.1 vs v0.2 & v0.3](/docs/intro/0.1-vs-0.2/).
+    - question: What licenses apply to pg_mooncake, duckdb_mooncake, and moonlink?
+      answer: >-
+        [`pg_mooncake`](https://github.com/pgsty/pg_mooncake) and [`duckdb_mooncake`](https://github.com/pgsty/duckdb_mooncake) (along with
+        `moonlink_rpc`, `moonlink_proto`, `moonlink_error`, and `moonlink_table_metadata`) are licensed under the permissive **MIT License**.
+        The core [`moonlink`](https://github.com/pgsty/moonlink) engine is licensed under **BSL-1.1** (converting automatically to **Apache-2.0**
+        on May 5, 2029) with an explicit **`PG_MOONCAKE LINKING & DISTRIBUTION EXCEPTION`** that permits unrestricted linking, copying,
+        modification, and redistribution when embedded in or distributed as part of `pg_mooncake`. See [License Details](/docs/about/license/).
+    - question: Why did my mooncake.create_table call fail when passing source_uri?
+      answer: >-
+        Upstream v0.2 documentation contained a parameter typo (`source_uri => ...`). The actual SQL procedure signature in `pg_mooncake` is
+        `mooncake.create_table(dst text, src text, src_uri text DEFAULT NULL, table_config json DEFAULT NULL)`. Always pass **`src_uri`**
+        when replicating from a remote PostgreSQL URI. See [Create Columnstore Table](/docs/reference/create-columnstore/).
+    - question: What is PGSTY's maintenance scope and security reporting policy?
+      answer: >-
+        PGSTY maintains supply-chain continuity, PostgreSQL 14–18 and `pg_duckdb` compatibility, and Linux RPM/DEB packaging across [16 OS/arch targets](/download/),
+        with full dependency disclosures in the [SBOM](/docs/about/sbom/). We do **not** commit to developing new upstream features—roadmap items are
+        handled on a best-effort basis—but **security vulnerabilities and critical bug reports are always welcome** via [GitHub Issues](https://github.com/pgsty/pg_mooncake/issues).
+
+cta:
+  title: Ready to run real-time columnar analytics in PostgreSQL?
+  desc: Follow the Getting Started guide, explore the SQL reference, or read the v0.3.0 release notes.
+  actions:
+    - label: Getting Started
+      url: /docs/getting-started/
+      icon: fa-solid fa-rocket
+      style: primary
+    - label: SQL Reference
+      url: /docs/reference/
+      icon: fa-solid fa-code
+      style: ghost
+    - label: Release Notes
+      url: /blog/release/pg-mooncake-0.3.0/
+      icon: fa-solid fa-tag
+      style: ghost

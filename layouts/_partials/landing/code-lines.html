@@ -1,0 +1,22 @@
+{{- $lines := .lines -}}
+{{- $position := .position | default "landing code lines" -}}
+{{- if not (reflect.IsSlice $lines) }}{{ warnf "%s must be an array; rendering no lines" $position }}{{ $lines = slice }}{{ end -}}
+{{- $rawLines := slice -}}
+{{- range $index, $line := $lines -}}
+  {{- if not (reflect.IsMap $line) }}{{ warnf "%s line %d must be a map; skipping it" $position (add $index 1) }}{{ continue }}{{ end -}}
+  {{- $class := strings.TrimSpace (printf "%v" ($line.class | default "")) -}}
+  {{- if and $class (not (in (slice "k" "s" "v" "c" "ok" "p") $class)) }}{{ warnf "%s line %d has unsupported class %q; dropping the class" $position (add $index 1) $class }}{{ end -}}
+  {{- if not (isset $line "text") }}{{ warnf "%s line %d requires text; skipping it" $position (add $index 1) }}{{ continue }}{{ end -}}
+  {{- $rawLines = $rawLines | append (printf "%s%s" ($line.prefix | default "") ($line.text | default "")) -}}
+{{- end -}}
+{{- $raw := delimit $rawLines "\n" -}}
+{{- $hl := transform.Highlight $raw "sql" (dict "noClasses" false) -}}
+{{- $inner := $hl | replaceRE `^<div class="highlight"><pre[^>]*><code[^>]*>` "" | replaceRE `</code></pre></div>\s*$` "" -}}
+{{- $inner = $inner | replaceRE `<span class="err">\$\$</span>` `<span class="dl">$$$$</span>` -}}
+{{- $inner = $inner | replaceRE `<span class="n">(EXTENSION)</span>` `<span class="k">$1</span>` -}}
+{{- $inner = $inner | replaceRE `<span class="k">(true|false)</span>` `<span class="kc">$1</span>` -}}
+{{- $inner = $inner | replaceRE `<span class="n">(bigserial|timestamptz|numeric|jsonb)</span>` `<span class="kt">$1</span>` -}}
+{{- $inner = $inner | replaceRE `<span class="n">(pg_mooncake|pg_duckdb|duckdb_mooncake|moonlink|duckdb|mooncake)</span>` `<span class="nc">$1</span>` -}}
+{{- $inner = $inner | replaceRE `<span class="n">(create_table|columnstore|read_parquet|iceberg_scan|delta_scan|create_simple_secret|columnstore_tables|load_files)</span>` `<span class="nf">$1</span>` -}}
+{{- $inner = $inner | replaceRE `<span class="n">(KEY_ID|SECRET|REGION|ENDPOINT|TYPE|PROVIDER)</span>` `<span class="na">$1</span>` -}}
+{{- `<span class="chroma">` | safeHTML -}}{{- $inner | safeHTML -}}{{- `</span>` | safeHTML -}}
