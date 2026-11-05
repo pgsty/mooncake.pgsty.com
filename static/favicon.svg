@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="240" height="240" viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg"
+     role="img" aria-labelledby="mooncake-title mooncake-desc" shape-rendering="geometricPrecision">
+  <title id="mooncake-title">Mooncake</title>
+  <desc id="mooncake-desc">Golden circular traditional Cantonese mooncake emblem for pg_mooncake.</desc>
+
+  <!-- 12-petal scalloped outer crust border (transparent background) -->
+  <g fill="#92400E">
+    <circle cx="120" cy="120" r="101"/>
+    <circle cx="204.00" cy="120.00" r="28"/>
+    <circle cx="192.75" cy="162.00" r="28"/>
+    <circle cx="162.00" cy="192.75" r="28"/>
+    <circle cx="120.00" cy="204.00" r="28"/>
+    <circle cx="78.00" cy="192.75" r="28"/>
+    <circle cx="47.25" cy="162.00" r="28"/>
+    <circle cx="36.00" cy="120.00" r="28"/>
+    <circle cx="47.25" cy="78.00" r="28"/>
+    <circle cx="78.00" cy="47.25" r="28"/>
+    <circle cx="120.00" cy="36.00" r="28"/>
+    <circle cx="162.00" cy="47.25" r="28"/>
+    <circle cx="192.75" cy="78.00" r="28"/>
+  </g>
+
+  <!-- 12-petal scalloped golden baked crust -->
+  <g fill="#F59E0B">
+    <circle cx="120" cy="120" r="95"/>
+    <circle cx="204.00" cy="120.00" r="22"/>
+    <circle cx="192.75" cy="162.00" r="22"/>
+    <circle cx="162.00" cy="192.75" r="22"/>
+    <circle cx="120.00" cy="204.00" r="22"/>
+    <circle cx="78.00" cy="192.75" r="22"/>
+    <circle cx="47.25" cy="162.00" r="22"/>
+    <circle cx="36.00" cy="120.00" r="22"/>
+    <circle cx="47.25" cy="78.00" r="22"/>
+    <circle cx="78.00" cy="47.25" r="22"/>
+    <circle cx="120.00" cy="36.00" r="22"/>
+    <circle cx="162.00" cy="47.25" r="22"/>
+    <circle cx="192.75" cy="78.00" r="22"/>
+  </g>
+
+  <!-- Subtle scallop petal highlights -->
+  <g fill="#FDE047">
+    <circle cx="212.00" cy="120.00" r="3.5"/>
+    <circle cx="199.67" cy="166.00" r="3.5"/>
+    <circle cx="166.00" cy="199.67" r="3.5"/>
+    <circle cx="120.00" cy="212.00" r="3.5"/>
+    <circle cx="74.00" cy="199.67" r="3.5"/>
+    <circle cx="40.33" cy="166.00" r="3.5"/>
+    <circle cx="28.00" cy="120.00" r="3.5"/>
+    <circle cx="40.33" cy="74.00" r="3.5"/>
+    <circle cx="74.00" cy="40.33" r="3.5"/>
+    <circle cx="120.00" cy="28.00" r="3.5"/>
+    <circle cx="166.00" cy="40.33" r="3.5"/>
+    <circle cx="199.67" cy="74.00" r="3.5"/>
+  </g>
+
+  <!-- Inner circular stamped rim -->
+  <circle cx="120" cy="120" r="84" fill="#92400E"/>
+  <circle cx="120" cy="120" r="78" fill="#FBBF24"/>
+
+  <!-- Diagonal corner auspicious dots -->
+  <g fill="#92400E">
+    <circle cx="75" cy="75" r="6"/>
+    <circle cx="165" cy="75" r="6"/>
+    <circle cx="165" cy="165" r="6"/>
+    <circle cx="75" cy="165" r="6"/>
+  </g>
+
+  <!-- Cardinal 4-petal lotus arches -->
+  <g fill="#92400E">
+    <circle cx="120" cy="68" r="22"/>
+    <circle cx="172" cy="120" r="22"/>
+    <circle cx="120" cy="172" r="22"/>
+    <circle cx="68" cy="120" r="22"/>
+  </g>
+  <g fill="#FDE047">
+    <circle cx="120" cy="68" r="16"/>
+    <circle cx="172" cy="120" r="16"/>
+    <circle cx="120" cy="172" r="16"/>
+    <circle cx="68" cy="120" r="16"/>
+  </g>
+
+  <!-- Central stamped rounded-square frame -->
+  <rect x="75" y="75" width="90" height="90" rx="18" fill="#92400E"/>
+  <rect x="81" y="81" width="78" height="78" rx="13" fill="#F59E0B"/>
+
+  <!-- Traditional 4-grid lattice & corner cutouts -->
+  <rect x="117" y="80" width="6" height="80" fill="#92400E"/>
+  <rect x="80" y="117" width="80" height="6" fill="#92400E"/>
+  <g fill="#FDE047">
+    <rect x="89" y="89" width="18" height="18" rx="4"/>
+    <rect x="133" y="89" width="18" height="18" rx="4"/>
+    <rect x="89" y="133" width="18" height="18" rx="4"/>
+    <rect x="133" y="133" width="18" height="18" rx="4"/>
+  </g>
+
+  <!-- Golden full-moon / yolk centerpiece -->
+  <circle cx="120" cy="120" r="23" fill="#92400E"/>
+  <circle cx="120" cy="120" r="17" fill="#FEF08A"/>
+  <circle cx="120" cy="120" r="7.5" fill="#D97706"/>
+</svg>

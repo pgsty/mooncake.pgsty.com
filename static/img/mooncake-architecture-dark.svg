@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="440" height="436"
+     viewBox="0 0 440 436" role="img" aria-labelledby="mooncake-arch-dark-title"
+     shape-rendering="geometricPrecision" text-rendering="geometricPrecision">
+  <title id="mooncake-arch-dark-title">Mooncake architecture: PostgreSQL rowstore WAL streams into Moonlink in-memory Arrow buffers and Parquet files, queried via pg_duckdb and duckdb_mooncake or exported as Apache Iceberg v2 tables</title>
+  <text x="220" y="14" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace" font-size="10" font-weight="600" fill="#8ea1b8" letter-spacing="1.7">POSTGRESQL 14–18 WORKLOADS</text>
+  <rect x="32" y="24" width="116" height="36" rx="10" fill="rgba(245,158,11,0.15)" stroke="rgba(245,158,11,0.48)" stroke-width="1.25"/>
+  <rect x="162" y="24" width="116" height="36" rx="10" fill="rgba(163,230,53,0.12)" stroke="rgba(163,230,53,0.42)" stroke-width="1.25"/>
+  <rect x="292" y="24" width="116" height="36" rx="10" fill="rgba(56,189,248,0.14)" stroke="rgba(56,189,248,0.42)" stroke-width="1.25"/>
+  <text x="90" y="47" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace" font-size="13" font-weight="700" fill="#fbbf24">Rowstore OLTP</text>
+  <text x="220" y="47" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace" font-size="13" font-weight="700" fill="#a3e635">Logical WAL</text>
+  <text x="350" y="47" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace" font-size="13" font-weight="700" fill="#38bdf8">USING mooncake</text>
+  <path d="M 90.0 60.0 L 90.0 70.0 L 220.0 70.0" fill="none" stroke="rgba(148,163,184,0.45)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 350.0 60.0 L 350.0 70.0 L 220.0 70.0" fill="none" stroke="rgba(148,163,184,0.45)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 220.0 60.0 L 220.0 84.0" fill="none" stroke="rgba(148,163,184,0.45)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 220.0 84.0 L 216.2 77.0 L 223.8 77.0 Z" fill="rgba(148,163,184,0.45)"/>
+
+  <rect x="32" y="86" width="376" height="88" rx="14" fill="#131c27" stroke="rgba(148,163,184,0.22)" stroke-width="1.25"/>
+  <text x="52" y="110" text-anchor="start" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace" font-size="10" font-weight="600" fill="#fbbf24" letter-spacing="1.7">MOONLINK INGESTION ENGINE</text>
+  <text x="388" y="110" text-anchor="end" font-family="ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif" font-size="11" font-weight="500" fill="#8ea1b8">Sub-Second CDC · Zero-ETL</text>
+  <rect x="68.0" y="124" width="24" height="24" rx="5" fill="rgba(245,158,11,0.20)" stroke="rgba(245,158,11,0.50)" stroke-width="1.15"/>
+  <rect x="103.0" y="124" width="24" height="24" rx="5" fill="rgba(163,230,53,0.16)" stroke="rgba(163,230,53,0.45)" stroke-width="1.15"/>
+  <rect x="138.0" y="124" width="24" height="24" rx="5" fill="rgba(245,158,11,0.20)" stroke="rgba(245,158,11,0.50)" stroke-width="1.15"/>
+  <rect x="173.0" y="124" width="24" height="24" rx="5" fill="rgba(56,189,248,0.16)" stroke="rgba(56,189,248,0.45)" stroke-width="1.15"/>
+  <rect x="208.0" y="124" width="24" height="24" rx="5" fill="rgba(245,158,11,0.20)" stroke="rgba(245,158,11,0.50)" stroke-width="1.15"/>
+  <rect x="243.0" y="124" width="24" height="24" rx="5" fill="rgba(163,230,53,0.16)" stroke="rgba(163,230,53,0.45)" stroke-width="1.15"/>
+  <rect x="278.0" y="124" width="24" height="24" rx="5" fill="rgba(245,158,11,0.20)" stroke="rgba(245,158,11,0.50)" stroke-width="1.15"/>
+  <rect x="313.0" y="124" width="24" height="24" rx="5" fill="rgba(56,189,248,0.16)" stroke="rgba(56,189,248,0.45)" stroke-width="1.15"/>
+  <rect x="348.0" y="124" width="24" height="24" rx="5" fill="rgba(163,230,53,0.16)" stroke="rgba(163,230,53,0.45)" stroke-width="1.15"/>
+  <text x="220" y="164" text-anchor="middle" font-family="ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif" font-size="10.5" font-weight="500" fill="#8ea1b8">Arrow Buffer · Roaring Deletion Vectors · LSN Snapshot Barrier</text>
+
+  <path d="M 220.0 174.0 L 220.0 196.0" fill="none" stroke="rgba(148,163,184,0.45)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 220.0 196.0 L 216.2 189.0 L 223.8 189.0 Z" fill="rgba(148,163,184,0.45)"/>
+
+  <rect x="24" y="198" width="392" height="116" rx="14" fill="#131c27" stroke="rgba(148,163,184,0.22)" stroke-width="1.25"/>
+  <text x="44" y="222" text-anchor="start" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace" font-size="10" font-weight="600" fill="#fbbf24" letter-spacing="1.7">MOONCAKE SUITE</text>
+  <text x="396" y="222" text-anchor="end" font-family="ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif" font-size="11" font-weight="500" fill="#8ea1b8">DuckDB 2.0 + Iceberg v2</text>
+  <rect x="42" y="236" width="110" height="62" rx="11" fill="rgba(245,158,11,0.15)" stroke="rgba(245,158,11,0.46)" stroke-width="1.25"/>
+  <text x="97" y="264" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace" font-size="13.5" font-weight="700" fill="#fbbf24">pg_mooncake</text>
+  <text x="97" y="285" text-anchor="middle" font-family="ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif" font-size="10.5" font-weight="500" fill="#9fb0c5">v0.3.0 · PG TAM</text>
+  <rect x="165" y="236" width="110" height="62" rx="11" fill="rgba(163,230,53,0.12)" stroke="rgba(163,230,53,0.42)" stroke-width="1.25"/>
+  <text x="220" y="264" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace" font-size="13.5" font-weight="700" fill="#a3e635">moonlink</text>
+  <text x="220" y="285" text-anchor="middle" font-family="ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif" font-size="10.5" font-weight="500" fill="#9fb0c5">v0.0.1 · CDC Core</text>
+  <rect x="288" y="236" width="110" height="62" rx="11" fill="rgba(56,189,248,0.14)" stroke="rgba(56,189,248,0.42)" stroke-width="1.25"/>
+  <text x="343" y="264" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace" font-size="13.5" font-weight="700" fill="#38bdf8">duckdb_mc</text>
+  <text x="343" y="285" text-anchor="middle" font-family="ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif" font-size="10.5" font-weight="500" fill="#9fb0c5">v0.0.2 · Scan</text>
+
+  <path d="M 220.0 314.0 L 220.0 336.0" fill="none" stroke="rgba(148,163,184,0.45)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 220.0 336.0 L 216.2 329.0 L 223.8 329.0 Z" fill="rgba(148,163,184,0.45)"/>
+
+  <rect x="32" y="338" width="376" height="86" rx="14" fill="#172230" stroke="rgba(148,163,184,0.22)" stroke-width="1.25"/>
+  <text x="52" y="362" text-anchor="start" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace" font-size="10" font-weight="600" fill="#fbbf24" letter-spacing="1.7">COLUMNSTORE &amp; LAKEHOUSE</text>
+  <text x="388" y="362" text-anchor="end" font-family="ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif" font-size="11" font-weight="500" fill="#8ea1b8">S3 · R2 · Local FS</text>
+  <text x="220" y="393" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,'Liberation Mono',monospace" font-size="15" font-weight="700" fill="#f1f5f9"><tspan fill="#fbbf24">1000× Analytics</tspan> · Open Iceberg</text>
+  <text x="220" y="413" text-anchor="middle" font-family="ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif" font-size="10.5" font-weight="500" fill="#9fb0c5">Vectorized DuckDB 2.0 Execution · Zero-Copy Arrow</text>
+</svg>
