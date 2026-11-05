@@ -1,0 +1,510 @@
+#=======================================#
+# Basics
+#=======================================#
+baseURL: https://mooncake.pgsty.com/
+title: Mooncake - Real-Time Columnstore & Apache Iceberg Lakehouse for PostgreSQL
+defaultContentLanguage: en
+defaultContentLanguageInSubdir: false
+enableRobotsTXT: true
+enableGitInfo: true
+hasCJKLanguage: true
+capitalizeListTitles: false
+timeZone: UTC
+
+pagination:
+  pagerSize: 20
+
+services:
+  googleAnalytics:
+    id: G-JLB25NYKJX
+
+frontmatter:
+  lastmod:
+    - lastmod
+    - ":git"
+    - date
+    - publishDate
+
+#=======================================#
+# Hugo Module
+#=======================================#
+module:
+  proxy: direct
+  hugoVersion:
+    extended: true
+    min: "0.168.0"
+  imports:
+    - path: github.com/pgsty/oink
+
+#=======================================#
+# Languages and navigation
+#=======================================#
+languages:
+  en:
+    label: English
+    locale: en-US
+    weight: 1
+    title: Mooncake
+    params:
+      description: "Real-time columnstore mirror and Apache Iceberg v2 lakehouse tables for PostgreSQL — powered by pg_mooncake, Moonlink, and DuckDB, maintained by PGSTY."
+      upstream_copyright: "© 2024–2026 Mooncake Labs Inc."
+      ui:
+        command_palette:
+          commands:
+            - id: quick_start
+              title: Getting Started & Installation
+              description: Install pg_mooncake with Pigsty packages or build from source on PostgreSQL 14–18
+              url: /docs/getting-started/
+              icon: fa-solid fa-bolt
+              keywords: [start, quickstart, install, pig, pg_mooncake, pg_duckdb]
+            - id: hello_world
+              title: Hello World Tutorial
+              description: Create a real-time columnstore mirror with mooncake.create_table and run DuckDB analytics
+              url: /docs/getting-started/hello-world/
+              icon: fa-solid fa-terminal
+              keywords: [hello, tutorial, create_table, mirror, columnstore]
+            - id: architecture
+              title: Architecture Overview
+              description: How pg_mooncake, Moonlink, pg_duckdb, and duckdb_mooncake work together
+              url: /docs/intro/architecture/
+              icon: fa-solid fa-sitemap
+              keywords: [architecture, moonlink, duckdb, iceberg, parquet, wal]
+            - id: moonlink_docs
+              title: Moonlink Ingestion Engine
+              description: Real-time logical replication, Arrow write buffers, deletion vectors, and standalone HTTP/RPC server
+              url: /docs/intro/moonlink/
+              icon: fa-solid fa-arrows-rotate
+              keywords: [moonlink, cdc, replication, arrow, parquet, iceberg]
+            - id: duckdb_mooncake_docs
+              title: duckdb_mooncake & DuckDB 2.0
+              description: DuckDB storage extension attaching to Moonlink metadata and scanning Parquet/Iceberg
+              url: /docs/intro/duckdb-mooncake/
+              icon: fa-solid fa-database
+              keywords: [duckdb, duckdb_mooncake, pg_duckdb, parquet, scan]
+            - id: sql_reference
+              title: SQL & Configuration Reference
+              description: mooncake.create_table, create_snapshot, optimize_table, list_tables, and GUC settings
+              url: /docs/reference/
+              icon: fa-solid fa-code
+              keywords: [reference, sql, guc, create_table, create_snapshot, list_tables]
+            - id: iceberg_reference
+              title: Iceberg & Object Storage
+              description: Configure S3 / R2 buckets, trigger Iceberg snapshots, and query from Spark, Snowflake, or DuckDB
+              url: /docs/reference/iceberg/
+              icon: fa-solid fa-cloud
+              keywords: [iceberg, s3, r2, bucket, snapshot, warehouse]
+            - id: use_cases
+              title: Use Cases (HTAP, Archiving, Lakehouse, Logs)
+              description: Real-time operational analytics, partition archiving, zero-ETL lakehouse, and OTel logs
+              url: /docs/use-cases/
+              icon: fa-solid fa-diagram-project
+              keywords: [use-cases, htap, analytics, archiving, lakehouse, logging]
+            - id: v01_archive
+              title: v0.1 Historical Documentation (Delta Lake)
+              description: Legacy documentation archive for pg_mooncake v0.1 (USING columnstore + Delta Lake)
+              url: /docs/v0.1/
+              icon: fa-solid fa-box-archive
+              keywords: [v0.1, legacy, delta, columnstore, archive]
+            - id: download_packages
+              title: Download & Availability Matrix
+              description: Install pg_mooncake with pig or native RPM/DEB packages across 16 Linux targets
+              url: /download/
+              icon: fa-solid fa-download
+              keywords: [download, install, pig, rpm, deb, matrix, packages]
+    menu:
+      main:
+        - identifier: docs
+          name: Docs
+          pageRef: /docs
+          weight: 10
+          params:
+            icon: fa-solid fa-book
+        - identifier: docs-intro
+          parent: docs
+          name: Introduction & Architecture
+          pageRef: /docs/intro
+          weight: 10
+          params:
+            icon: fa-solid fa-compass
+            description: Overview of pg_mooncake, Moonlink, duckdb_mooncake, and v0.1 vs v0.2/v0.3
+        - identifier: docs-getting-started
+          parent: docs
+          name: Getting Started
+          pageRef: /docs/getting-started
+          weight: 20
+          params:
+            icon: fa-solid fa-rocket
+            description: Installation with Pigsty or source, Hello World tutorial, and known limitations
+        - identifier: docs-reference
+          parent: docs
+          name: SQL & Config Reference
+          pageRef: /docs/reference
+          weight: 30
+          params:
+            icon: fa-solid fa-code
+            description: Columnstore procedures, query shapes, Iceberg snapshots, and data lake scans
+        - identifier: docs-use-cases
+          parent: docs
+          name: Use Cases
+          pageRef: /docs/use-cases
+          weight: 40
+          params:
+            icon: fa-solid fa-diagram-project
+            description: Real-time HTAP analytics, partition archiving, Postgres lakehouse, and logs
+        - identifier: docs-v01
+          parent: docs
+          name: v0.1 Archive (Delta Lake)
+          pageRef: /docs/v0.1
+          weight: 50
+          params:
+            icon: fa-solid fa-box-archive
+            description: Complete historical documentation for pg_mooncake v0.1 (USING columnstore)
+        - identifier: docs-about
+          parent: docs
+          name: About & Licensing
+          pageRef: /docs/about
+          weight: 60
+          params:
+            icon: fa-solid fa-circle-info
+            description: PGSTY stewardship, MIT & BSL-1.1 exception licensing, attribution, and SBOM
+        - identifier: blog
+          name: Blog
+          pageRef: /blog
+          weight: 20
+          params:
+            icon: fa-solid fa-blog
+        - identifier: blog-post
+          parent: blog
+          name: Engineering & Deep Dives
+          pageRef: /blog/post
+          weight: 10
+          params:
+            icon: fa-solid fa-compass-drafting
+            description: DuckDB 2.0 adaptation, Moonlink LSN barriers, and Rust dependency audits
+        - identifier: blog-release
+          parent: blog
+          name: Release Notes
+          pageRef: /blog/release
+          weight: 20
+          params:
+            icon: fa-solid fa-tag
+            description: Version announcements for pg_mooncake, duckdb_mooncake, and moonlink
+        - identifier: download
+          name: Download
+          pageRef: /download
+          weight: 30
+          params:
+            icon: fa-solid fa-download
+        - identifier: pigsty
+          name: Pigsty
+          weight: 60
+          url: https://pigsty.io
+          params:
+            icon: fa-solid fa-database
+        - identifier: github
+          name: GitHub
+          weight: 70
+          url: https://github.com/pgsty/pg_mooncake
+          params:
+            icon: fa-brands fa-github
+  zh:
+    label: 简体中文
+    locale: zh-CN
+    weight: 2
+    title: Mooncake
+    hasCJKLanguage: true
+    params:
+      description: "由 Pigsty 维护的 PostgreSQL 实时列存镜像与 Apache Iceberg v2 湖仓扩展套件 —— 基于 pg_mooncake、Moonlink 与 DuckDB 构建。"
+      upstream_copyright: "© 2024–2026 Mooncake Labs Inc."
+      copyright:
+        authors: '[Mooncake Labs](https://github.com/Mooncake-Labs) & [PGSTY](https://pigsty.cc/) · 文档采用 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) 许可'
+        from_year: 2024
+        url: https://pigsty.cc/
+      ui:
+        command_palette:
+          commands:
+            - id: quick_start
+              title: 快速开始与安装指南
+              description: 使用 Pigsty 软件包或从源码在 PostgreSQL 14–18 上构建安装 pg_mooncake
+              url: /zh/docs/getting-started/
+              icon: fa-solid fa-bolt
+              keywords: [start, quickstart, install, pig, pg_mooncake, pg_duckdb, 快速开始, 安装]
+            - id: hello_world
+              title: Hello World 快速上手
+              description: 使用 mooncake.create_table 创建实时列存镜像并运行 DuckDB 向量化分析查询
+              url: /zh/docs/getting-started/hello-world/
+              icon: fa-solid fa-terminal
+              keywords: [hello, tutorial, create_table, mirror, columnstore, 教程, 列存]
+            - id: architecture
+              title: 架构总览
+              description: 深入解析 pg_mooncake、Moonlink、pg_duckdb 与 duckdb_mooncake 协同原理
+              url: /zh/docs/intro/architecture/
+              icon: fa-solid fa-sitemap
+              keywords: [architecture, moonlink, duckdb, iceberg, parquet, wal, 架构]
+            - id: moonlink_docs
+              title: Moonlink 实时摄取引擎
+              description: 逻辑复制 CDC、Arrow 内存写缓冲、删除向量与独立 HTTP/RPC 服务参考
+              url: /zh/docs/intro/moonlink/
+              icon: fa-solid fa-arrows-rotate
+              keywords: [moonlink, cdc, replication, arrow, parquet, iceberg, 逻辑复制]
+            - id: duckdb_mooncake_docs
+              title: duckdb_mooncake 与 DuckDB 2.0
+              description: 连接 Moonlink 元数据并扫描 Parquet/Iceberg 表文件的 DuckDB 存储扩展
+              url: /zh/docs/intro/duckdb-mooncake/
+              icon: fa-solid fa-database
+              keywords: [duckdb, duckdb_mooncake, pg_duckdb, parquet, scan]
+            - id: sql_reference
+              title: SQL 接口与配置参数参考
+              description: mooncake.create_table、create_snapshot、optimize_table、list_tables 与 GUC 参数
+              url: /zh/docs/reference/
+              icon: fa-solid fa-code
+              keywords: [reference, sql, guc, create_table, create_snapshot, list_tables, 参考]
+            - id: iceberg_reference
+              title: Iceberg 与对象存储配置
+              description: 配置 S3 / R2 存储桶、生成 Iceberg 快照，并通过 Spark、Snowflake 或 DuckDB 外部读取
+              url: /zh/docs/reference/iceberg/
+              icon: fa-solid fa-cloud
+              keywords: [iceberg, s3, r2, bucket, snapshot, warehouse, 对象存储]
+            - id: use_cases
+              title: 应用场景（实时分析、分区归档、湖仓一体、日志分析）
+              description: 实时 HTAP 分析、历史大表分区归档、零 ETL 湖仓与 OpenTelemetry 日志分析
+              url: /zh/docs/use-cases/
+              icon: fa-solid fa-diagram-project
+              keywords: [use-cases, htap, analytics, archiving, lakehouse, logging, 场景, 归档]
+            - id: v01_archive
+              title: v0.1 历史文档归档 (Delta Lake)
+              description: pg_mooncake v0.1（USING columnstore + Delta Lake）完整历史参考手册
+              url: /zh/docs/v0.1/
+              icon: fa-solid fa-box-archive
+              keywords: [v0.1, legacy, delta, columnstore, archive, 历史文档]
+            - id: download_packages
+              title: 下载与可用性矩阵
+              description: 使用 pig 包管理器或原生 RPM / DEB 软件包在 16 个 Linux 平台上安装 pg_mooncake
+              url: /zh/download/
+              icon: fa-solid fa-download
+              keywords: [download, install, pig, rpm, deb, matrix, 下载, 安装, 软件包]
+    menu:
+      main:
+        - identifier: docs
+          name: 文档
+          pageRef: /docs
+          weight: 10
+          params:
+            icon: fa-solid fa-book
+        - identifier: docs-intro
+          parent: docs
+          name: 简介与架构
+          pageRef: /docs/intro
+          weight: 10
+          params:
+            icon: fa-solid fa-compass
+            description: pg_mooncake、Moonlink、duckdb_mooncake 架构与 v0.1 / v0.2 / v0.3 演进对比
+        - identifier: docs-getting-started
+          parent: docs
+          name: 快速开始
+          pageRef: /docs/getting-started
+          weight: 20
+          params:
+            icon: fa-solid fa-rocket
+            description: 使用 Pigsty 或源码安装、Hello World 上手教程与已知限制说明
+        - identifier: docs-reference
+          parent: docs
+          name: SQL 与配置参考
+          pageRef: /docs/reference
+          weight: 30
+          params:
+            icon: fa-solid fa-code
+            description: 列存表管理过程、支持的查询形态、Iceberg 快照配置与外部数据湖查询
+        - identifier: docs-use-cases
+          parent: docs
+          name: 应用场景
+          pageRef: /docs/use-cases
+          weight: 40
+          params:
+            icon: fa-solid fa-diagram-project
+            description: 实时 HTAP 分析、大表分区归档、Postgres 湖仓一体与 OTel 日志分析
+        - identifier: docs-v01
+          parent: docs
+          name: v0.1 历史归档 (Delta Lake)
+          pageRef: /docs/v0.1
+          weight: 50
+          params:
+            icon: fa-solid fa-box-archive
+            description: pg_mooncake v0.1（USING columnstore + Delta Lake）完整历史技术文档归档
+        - identifier: docs-about
+          parent: docs
+          name: 关于与开源许可
+          pageRef: /docs/about
+          weight: 60
+          params:
+            icon: fa-solid fa-circle-info
+            description: PGSTY 社区维护说明、MIT 与 BSL-1.1 链接豁免许可证、来源署名与 SBOM
+        - identifier: blog
+          name: 博客
+          pageRef: /blog
+          weight: 20
+          params:
+            icon: fa-solid fa-blog
+        - identifier: blog-post
+          parent: blog
+          name: 工程与深度解析
+          pageRef: /blog/post
+          weight: 10
+          params:
+            icon: fa-solid fa-compass-drafting
+            description: DuckDB 2.0 适配、Moonlink LSN 快照屏障与 Rust 依赖安全审计剖析
+        - identifier: blog-release
+          parent: blog
+          name: 发布说明
+          pageRef: /blog/release
+          weight: 20
+          params:
+            icon: fa-solid fa-tag
+            description: pg_mooncake、duckdb_mooncake 与 moonlink 各版本发布公告
+        - identifier: download
+          name: 下载
+          pageRef: /download
+          weight: 30
+          params:
+            icon: fa-solid fa-download
+        - identifier: pigsty
+          name: Pigsty
+          weight: 60
+          url: https://pigsty.cc
+          params:
+            icon: fa-solid fa-database
+        - identifier: github
+          name: GitHub
+          weight: 70
+          url: https://github.com/pgsty/pg_mooncake
+          params:
+            icon: fa-brands fa-github
+
+#=======================================#
+# Taxonomies and blog URLs
+#=======================================#
+taxonomies:
+  categories: categories
+  tags: tags
+  author: authors
+
+permalinks:
+  blog: '/:sections/:contentbasename/'
+
+#=======================================#
+# Markdown and syntax highlighting
+#=======================================#
+markup:
+  goldmark:
+    parser:
+      wrapStandAloneImageWithinParagraph: false
+      attribute:
+        block: true
+      autoHeadingID: true
+      autoHeadingIDType: github
+    renderer:
+      unsafe: true
+    extensions:
+      footnote: true
+      linkify: true
+      table: true
+      taskList: true
+      typographer: true
+      passthrough:
+        enable: true
+        delimiters:
+          inline:
+            - ['\(', '\)']
+          block:
+            - ['$$', '$$']
+            - ['\[', '\]']
+  highlight:
+    style: tango
+    codeFences: true
+    noClasses: false
+  tableOfContents:
+    startLevel: 2
+    endLevel: 4
+
+#=======================================#
+# Outputs
+#=======================================#
+outputs:
+  home: [HTML, RSS, markdown, LLMS]
+  page: [HTML, markdown]
+  section: [HTML, RSS, print, markdown]
+
+#=======================================#
+# Site parameters
+#=======================================#
+params:
+  description: "pg_mooncake adds real-time columnstore mirror tables and Apache Iceberg v2 lakehouse storage to PostgreSQL, powered by Moonlink and DuckDB, maintained by the Pigsty community."
+  logo: img/mooncake.svg
+  version: 0.3.0
+  copyright:
+    authors: '[Mooncake Labs](https://github.com/Mooncake-Labs) & [PGSTY](https://pigsty.io/) · [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)'
+    from_year: 2024
+    url: https://pigsty.io/
+
+  page_width: normal
+  time_format_blog: 2006-01-02
+  time_format_default: 2006-01-02
+  footer_icp: ""
+
+  # Upstream provenance defaults
+  upstream_name: Mooncake-Labs/pg_mooncake
+  upstream_license: MIT
+  upstream_notice: /docs/about/attribution/
+
+  archived_version: false
+  url_latest_version: https://mooncake.pgsty.com
+  github_repo: https://github.com/pgsty/mooncake.pgsty.com
+  github_project_repo: https://github.com/pgsty/pg_mooncake
+  github_branch: main
+
+  offline_search: true
+  offline_search_index: content
+  offline_search_summary_length: 90
+  offline_search_max_results: 10
+  highlight_classes: true
+
+  comments:
+    enable: false
+
+  ui:
+    compare: true
+    preset: paper
+    preset_menu: [paper, slate, ink, terminal]
+    shell_types: [docs, blog]
+    quick_links: [docs, blog]
+    sidebar_icon_policy: all
+    typography: technical
+    breadcrumb: true
+    navbar_logo: true
+    navbar_translucent_over_cover_disable: false
+    navbar_theme: dark
+    sidebar_menu_compact: true
+    sidebar_menu_foldable: true
+    sidebar_menu_truncate: 2000
+    sidebar_cache_limit: 1000
+    sidebar_root_enabled: true
+    sidebar_expand_levels: 2
+    dark_mode: true
+    scroll_spy: false
+    sidebar_root_menu: true
+    sidebar_width_min: 220
+    sidebar_width_max: 480
+    sidebar_item_overflow: ellipsis
+    page_context_menu:
+      enable: true
+      assistant_links: false
+      links: []
+    feedback:
+      enable: false
+    reading_time: false
+    section_index: cards
+    blog_index: cards
+    blog_index_columns: 3
+    blog_index_toggle: true
+    blog_index_size: 18
+    backlinks: true

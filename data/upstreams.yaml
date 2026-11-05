@@ -1,0 +1,54 @@
+docs:
+  name: docs.mooncake.dev (Wayback Machine Archive)
+  license: MIT
+  notice: /docs/about/attribution/
+  copyright: "© 2024–2026 Mooncake Labs Inc."
+  lang:
+    en:
+      copyright: "© 2024–2026 Mooncake Labs Inc."
+    zh:
+      copyright: "© 2024–2026 Mooncake Labs Inc."
+
+blog:
+  name: mooncake.dev/blog (Wayback Machine Archive)
+  license: CC-BY-4.0
+  notice: /docs/about/attribution/
+  copyright: "© 2024–2025 Mooncake Labs Inc."
+  lang:
+    en:
+      copyright: "© 2024–2025 Mooncake Labs Inc."
+    zh:
+      copyright: "© 2024–2025 Mooncake Labs Inc."
+
+pg_mooncake:
+  name: Mooncake-Labs/pg_mooncake
+  license: MIT
+  notice: /docs/about/attribution/
+  copyright: "© 2024–2026 Mooncake Labs Inc."
+  lang:
+    en:
+      copyright: "© 2024–2026 Mooncake Labs Inc."
+    zh:
+      copyright: "© 2024–2026 Mooncake Labs Inc."
+
+duckdb_mooncake:
+  name: Mooncake-Labs/duckdb_mooncake
+  license: MIT
+  notice: /docs/about/attribution/
+  copyright: "© 2024–2026 Mooncake Labs Inc."
+  lang:
+    en:
+      copyright: "© 2024–2026 Mooncake Labs Inc."
+    zh:
+      copyright: "© 2024–2026 Mooncake Labs Inc."
+
+moonlink:
+  name: Mooncake-Labs/moonlink
+  license: BUSL-1.1
+  notice: /docs/about/attribution/
+  copyright: "© 2025–2026 Mooncake Labs Inc."
+  lang:
+    en:
+      copyright: "© 2025–2026 Mooncake Labs Inc."
+    zh:
+      copyright: "© 2025–2026 Mooncake Labs Inc."
