@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="pg_mooncake v0.1 Out of Beta">
+  <defs>
+    <linearGradient id="bg_pgmooncake-v01" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0F172A"/>
+      <stop offset="55%" stop-color="#1E293B"/>
+      <stop offset="100%" stop-color="#2A1B12"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg_pgmooncake-v01)"/>
+  <rect x="72" y="72" width="1056" height="486" rx="28" fill="rgba(15,23,42,0.78)" stroke="rgba(251,191,36,0.38)" stroke-width="2"/>
+  <text x="124" y="156" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="20" font-weight="700" fill="#FBBF24" letter-spacing="3">RELEASE ANNOUNCEMENT · v0.1</text>
+  <text x="124" y="246" font-family="ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,sans-serif" font-size="48" font-weight="800" fill="#F8FAFC">pg_mooncake v0.1 Out of Beta</text>
+  <text x="124" y="314" font-family="ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,sans-serif" font-size="27" font-weight="600" fill="#CBD5E1">Native Columnstore Tables, Parquet/Iceberg Scans &amp; ClickBench Top 10</text>
+  <rect x="124" y="388" width="260" height="54" rx="12" fill="rgba(245,158,11,0.16)" stroke="rgba(251,191,36,0.5)" stroke-width="1.5"/>
+  <text x="254" y="422" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="19" font-weight="700" fill="#FBBF24">Mooncake Labs Team</text>
+  <rect x="404" y="388" width="260" height="54" rx="12" fill="rgba(56,189,248,0.16)" stroke="rgba(56,189,248,0.5)" stroke-width="1.5"/>
+  <text x="534" y="422" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="19" font-weight="700" fill="#38BDF8">v0.1.0</text>
+  <rect x="684" y="388" width="280" height="54" rx="12" fill="rgba(163,230,53,0.15)" stroke="rgba(163,230,53,0.48)" stroke-width="1.5"/>
+  <text x="824" y="422" text-anchor="middle" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="19" font-weight="700" fill="#A3E635">DuckDB</text>
+  <text x="124" y="504" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="19" font-weight="500" fill="#94A3B8">2025-01-11 · Mooncake Labs Release Notes</text>
+</svg>
