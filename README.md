@@ -12,7 +12,7 @@ Companion documentation and engineering blog for the [**PGSTY**](https://github.
 
 ## Site Architecture
 
-Built with **Hugo Extended `0.168.0`**, **Go `1.27.3`**, and **[`github.com/pgsty/oink v1.5.0`](https://github.com/pgsty/oink)** (`GOWORK=off HUGO_MODULE_WORKSPACE=off`).
+Built with **Hugo Extended `0.168.0`**, **Go `1.27.3`**, and **[`github.com/pgsty/oink v1.5.1`](https://github.com/pgsty/oink)** (`GOWORK=off HUGO_MODULE_WORKSPACE=off`).
 
 Unlike multi-extension portals that split `/docs/` into separate sidebar roots, `mooncake.pgsty.com` presents a single unified documentation tree directly under `content/docs/` (`sidebar_root_for: self` on `content/docs/_index.{md,zh.md}`):
 

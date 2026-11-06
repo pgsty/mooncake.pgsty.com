@@ -4,7 +4,7 @@
 
 This repository builds **`https://mooncake.pgsty.com/`**, the companion documentation and engineering blog website for **`pgsty/pg_mooncake`** (`v0.3.0`), **`pgsty/duckdb_mooncake`** (`v0.0.2`), and **`pgsty/moonlink`** (`v0.0.1`).
 
-- **Framework**: Hugo Extended `0.168.0` + Go `1.27.3` + `github.com/pgsty/oink v1.5.0`
+- **Framework**: Hugo Extended `0.168.0` + Go `1.27.3` + `github.com/pgsty/oink v1.5.1`
 - **Upstream Docs Source**: Historical `https://docs.mooncake.dev/` snapshot (`https://web.archive.org/web/20251207085834/https://docs.mooncake.dev/pg/intro/`)
 - **Code Repositories**:
   - `https://github.com/pgsty/pg_mooncake` (`/Users/vonng/pgsty/pg_mooncake`, tag `v0.3.0`, `MIT`)
@@ -16,8 +16,8 @@ This repository builds **`https://mooncake.pgsty.com/`**, the companion document
 
 ## 2. Hard Rules
 
-1. **Pure OINK 1.5.0**:
-   - Rely on `github.com/pgsty/oink v1.5.0` layouts, shortcodes, and `data/home/en.yaml` sections. Do not copy or fork OINK templates into `layouts/` unless strictly necessary.
+1. **Pure OINK 1.5.1**:
+   - Rely on `github.com/pgsty/oink v1.5.1` layouts, shortcodes, and `data/home/en.yaml` sections. Do not copy or fork OINK templates into `layouts/` unless strictly necessary.
    - Always run Hugo with `GOWORK=off HUGO_MODULE_WORKSPACE=off`.
    - Never enable `--panicOnWarning` or `HUGO_PANICONWARNING`.
 
